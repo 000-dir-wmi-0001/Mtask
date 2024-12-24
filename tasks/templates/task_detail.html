@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Detail</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>{{ task.title }}</h1>
+        <p>{{ task.description }}</p>
+        <p>Due Date: {{ task.due_date }}</p>
+        <p>Priority: {{ task.priority }}</p>
+        <p>Category: {{ task.category.name if task.category else 'None' }}</p>
+        <h2>Comments</h2>
+        <ul class="list-group mb-3">
+            {% for comment in comments %}
+                <li class="list-group-item">
+                    {{ comment.text }} - {{ comment.user.username }}
+                </li>
+            {% endfor %}
+        </ul>
+        <form method="POST">
+            {% csrf_token %}
+            {{ comment_form.as_p }}
+            <button type="submit" class="btn btn-primary">Add Comment</button>
+        </form>
+    </div>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>

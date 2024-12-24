@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task List</title>
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Tasks</h1>
+        <a href="{% url 'task_create' %}" class="btn btn-primary mb-3">Create Task</a>
+        <ul class="list-group">
+            {% for task in tasks %}
+                <li class="list-group-item">
+                    <a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+</body>
+</html>
